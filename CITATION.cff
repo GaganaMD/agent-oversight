@@ -1,10 +1,26 @@
 cff-version: 1.2.0
-title: "Detection Is Not Containment"
+title: "Agent Oversight: monitoring, escalation and containment of AI agent actions"
 message: "If you use this research artifact, please cite the repository and describe its narrow synthetic setting."
 type: software
 authors:
-  - family-names: GaganaMD
+  - name: "Gagana M D"
 license: MIT
-repository-code: "https://github.com/GaganaMD/detection-is-not-containment"
-version: 1.0.0
-date-released: "2026-09-14"
+repository-code: "https://github.com/GaganaMD/agent-oversight"
+version: 2.0.0
+date-released: "2026-10-31"
+references:
+  - type: report
+    title: "Detection Is Not Containment: Timely Monitoring Determines Whether AI Agent Failures Can Be Prevented"
+    authors:
+      - name: "Gagana M D"
+      - name: "Kaustubh Gupta"
+      - name: "María Inés Berdiñas"
+    year: 2026
+    notes: "Apart Research AI Incident Response Sprint. The monitoring experiment in this repository is the part of that joint project authored by Gagana M D."
+    url: "https://apartresearch.com/sprints/projects/detection-is-not-containment-timely-monitoring-determines-whether-ai-agent-failures-can-be-prevented-oexs"
+  - type: software
+    title: "Detection Is Not Containment (joint repository)"
+    authors:
+      - name: "Gagana M D"
+      - name: "Kaustubh Gupta"
+    url: "https://github.com/GaganaMD/detection-is-not-containment"

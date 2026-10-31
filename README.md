@@ -1,4 +1,20 @@
-# Detection Is Not Containment
+# Agent Oversight
+
+Research on whether monitoring of AI agents can still prevent harm when it fires: the monitoring-control experiments behind *Detection Is Not Containment*, and a follow-up study of human and LLM overseers deciding under a deadline. Author: Gagana M D.
+
+## Relationship to the original collaboration
+
+This work began as a joint project at the Apart Research AI Incident Response Sprint (September 2026), reported as *Detection Is Not Containment: Timely Monitoring Determines Whether AI Agent Failures Can Be Prevented* by Gagana M D, Kaustubh Gupta and María Inés Berdiñas ([project page](https://apartresearch.com/sprints/projects/detection-is-not-containment-timely-monitoring-determines-whether-ai-agent-failures-can-be-prevented-oexs)). That report had three parts:
+
+| Part | Authors (per the report) | Where it lives |
+|---|---|---|
+| Monitoring-control experiment (Phases A to F) | Gagana M D | this repository (history preserved from the joint repo) |
+| Public-source incident forensics and the sim/real checklist protocol | Kaustubh Gupta and María Inés Berdiñas | [GaganaMD/detection-is-not-containment](https://github.com/GaganaMD/detection-is-not-containment) only; **not included here** |
+| Human-deadline oversight study (`oversight/`, October 2026) | Gagana M D | this repository |
+
+The project framing and the report were shared work. This repository contains only the code that Gagana M D wrote. None of the code here imports or depends on the forensics or protocol pipeline. Where the paper draft refers to the forensics results, it cites the joint report. [`PROVENANCE.md`](PROVENANCE.md) maps every result folder to the commit that produced it in the original repository.
+
+---
 
 A local, deterministic AI-control research artifact about a basic but often-missed distinction:
 
@@ -7,6 +23,12 @@ A local, deterministic AI-control research artifact about a basic but often-miss
 This repository measures monitor evidence and threshold crossings over trajectory prefixes, compares them to an independently frozen safety boundary, and then replays a matched authority-revocation intervention. The empirical setting is deliberately narrow: a synthetic authorization-controlled delivery environment, local Qwen monitors, fixed prompts, fixed inputs, and deterministic/cached evaluation where stated.
 
 ![Evidence arrives differently across monitor views](figures/fig1.png)
+
+## Follow-up: human-deadline oversight study
+
+The `oversight/` package scales the experiment from one fixture to 54 matched authorized/unauthorized trajectory pairs (6 task types x 3 identifier formats x 3 intervention margins), adds repeated sampling, and tests whether a human or LLM overseer can make the revoke-or-allow decision before the last-safe point. Design and hypotheses were pre-registered before any data ([`docs/HUMAN_DEADLINE_PREREGISTRATION.md`](docs/HUMAN_DEADLINE_PREREGISTRATION.md)). Results: [`results/oversight/summary.md`](results/oversight/summary.md). Paper draft: [`paper/DRAFT.md`](paper/DRAFT.md). Runbook: [`oversight/README.md`](oversight/README.md).
+
+The model runs used Qwen3-14B (bf16, vLLM on Modal), a different serving stack from the frozen phases below, so they are a new experiment, not a reproduction. The human results so far are one complete pilot session.
 
 ## What the project shows — and does not show
 
@@ -68,6 +90,9 @@ figures/main/                three judge-facing explanatory PNGs
 figures/supporting/          timing and outcome supporting figures
 tests/                       deterministic apparatus and protocol tests
 scripts/verify_release.py   read-only integrity and release-layout verification
+oversight/                   human-deadline oversight study: scenarios, runners, participant page, analysis
+results/oversight/           its model call logs, human sessions, summary and figures
+paper/                       paper draft for the oversight study
 ```
 
 ## Reproduce and verify
@@ -86,7 +111,10 @@ Run from the repository root:
 python scripts/verify_release.py
 python -m unittest discover -s tests -v
 python -m hermes_phase_f.pilot.validate_phase_f
+python -m oversight.analyze
 ```
+
+`oversight.analyze` recomputes `results/oversight/summary.json` and the figures from the logged calls and sessions without calling a model; the output should be byte-identical to the committed file. The oversight model runs need `matplotlib` for figures and, for new inference, a Modal account (see `oversight/README.md`).
 
 These commands do not call a model. `verify_release.py` checks the frozen A.5 oracle-body hash and frozen monitor-prompt hash, checks expected released structure, and verifies that the six explanatory PNGs are present without decoding or transforming them.
 
