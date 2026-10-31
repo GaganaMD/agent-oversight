@@ -1,20 +1,8 @@
 # Agent Oversight
 
-Research on whether monitoring of AI agents can still prevent harm when it fires: the monitoring-control experiments behind *Detection Is Not Containment*, and a follow-up study of human and LLM overseers deciding under a deadline. Author: Gagana M D.
+Research on whether monitoring of AI agents can still prevent harm when it fires: the monitoring-control experiments behind *Detection Is Not Containment*, and a follow-up study of human and LLM overseers deciding under a deadline.
 
-## Relationship to the original collaboration
-
-This work began as a joint project at the Apart Research AI Incident Response Sprint (September 2026), reported as *Detection Is Not Containment: Timely Monitoring Determines Whether AI Agent Failures Can Be Prevented* by Gagana M D, Kaustubh Gupta and María Inés Berdiñas ([project page](https://apartresearch.com/sprints/projects/detection-is-not-containment-timely-monitoring-determines-whether-ai-agent-failures-can-be-prevented-oexs)). That report had three parts:
-
-| Part | Authors (per the report) | Where it lives |
-|---|---|---|
-| Monitoring-control experiment (Phases A to F) | Gagana M D | this repository (history preserved from the joint repo) |
-| Public-source incident forensics and the sim/real checklist protocol | Kaustubh Gupta and María Inés Berdiñas | [GaganaMD/detection-is-not-containment](https://github.com/GaganaMD/detection-is-not-containment) only; **not included here** |
-| Human-deadline oversight study (`oversight/`, October 2026) | Gagana M D | this repository |
-
-The project framing and the report were shared work. This repository contains only the code that Gagana M D wrote. None of the code here imports or depends on the forensics or protocol pipeline. Where the paper draft refers to the forensics results, it cites the joint report. [`PROVENANCE.md`](PROVENANCE.md) maps every result folder to the commit that produced it in the original repository.
-
----
+This project began at the Apart Research AI Incident Response Sprint (September 2026); see the [joint report](https://apartresearch.com/sprints/projects/detection-is-not-containment-timely-monitoring-determines-whether-ai-agent-failures-can-be-prevented-oexs). [`PROVENANCE.md`](PROVENANCE.md) records where each result came from.
 
 A local, deterministic AI-control research artifact about a basic but often-missed distinction:
 
